@@ -1,0 +1,30 @@
+Sub mergeAllRow()
+    Sheets(1).Select
+    Sheets(1).Copy Before:=Sheets(1)
+    Sheets(1).Select
+    Sheets(1).Name = "合并表"
+    For i = 3 To Sheets.Count
+       x = Range("A65536").End(xlUp).Row + 1
+       Sheets(i).Range("A2", Sheets(i).UsedRange.Cells(Sheets(i).UsedRange.Count)).Copy Cells(x, 1)
+    Next
+    Range("A1").Select
+    MsgBox "合并完毕！", vbInformation, "提示"
+End Sub
+
+Sub mergeLastRow()
+    Sheets(1).Select
+    Sheets(1).Copy Before:=Sheets(1)
+    Sheets(1).Select
+    Sheets(1).Name = "合并表"
+    Sheets(1).Range("A3", Sheets(1).UsedRange.Cells(Sheets(1).UsedRange.Count)).Delete
+    For i = 3 To Sheets.Count
+       x = Range("A65536").End(xlUp).Row + 1
+       Sheets(i).Range("A" & Sheets(i).UsedRange.Rows.Count, Sheets(i).UsedRange.Cells(Sheets(i).UsedRange.Count)).Copy Cells(x, 1)
+    Next
+    Range("A1").Select
+    MsgBox "合并完毕！", vbInformation, "提示"
+End Sub
+
+Sub delMergeSheet()
+    Sheets("合并表").Delete
+End Sub
